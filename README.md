@@ -19,3 +19,11 @@ cd elixir-demo/
 chmod u+x installer.sh runner.sh
 TARGET_BASE_URL=YOUR_SERVER_BASE_URL_HERE ./runner.sh
 ```
+
+## Things to demo (hopefully)
+
+- Pipes
+- Pattern matching
+- Umbrella & subapps
+- GenServer
+- Swarm & clustering
