@@ -1,6 +1,8 @@
 #!/bin/sh
-source ./runner-base.sh
+./runner-base.sh
 
-iex --sname runner
+iex --cookie "elixir-meetup-demo-2019" --sname "runner" -S mix
 
-# mix run -e 'LoadTester.run("http://server-1:5000")'
+# Then run...
+# Chaperon.Master.start()
+# LoadTester.run("http://server-1:5000")
