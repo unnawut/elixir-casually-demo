@@ -3,7 +3,11 @@ defmodule LoadTester do
   Documentation for LoadTester.
   """
 
-  def run do
+  def run(base_url \\ nil) do
+    if base_url do
+      Application.put_env(:load_tester, :target_base_url, base_url)
+    end
+
     target_base_url = Application.get_env(:load_tester, :target_base_url)
     session = Chaperon.run_load_test(LoadTester.Runner)
     metrics = Map.get(session.metrics, {:get, "#{target_base_url}/"})
