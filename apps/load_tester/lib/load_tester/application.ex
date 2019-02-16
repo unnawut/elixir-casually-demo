@@ -3,7 +3,11 @@ defmodule LoadTester.Application do
   use Application
 
   def start(_type, _args) do
-    children = []
+    topologies = Application.get_env(:load_tester, :libcluster_topologies)
+
+    children = [
+      {Cluster.Supervisor, [topologies, [name: LoadTester.ClusterSupervisor]]},
+    ]
 
     opts = [strategy: :one_for_one, name: LoadTester.Supervisor]
     Supervisor.start_link(children, opts)

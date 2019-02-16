@@ -26,7 +26,8 @@ defmodule LoadTester.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:chaperon, "~> 0.2"}
+      {:chaperon, "~> 0.2"},
+      {:libcluster, "~> 3.0"}
     ]
   end
 end
