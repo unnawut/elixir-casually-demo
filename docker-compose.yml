@@ -1,0 +1,61 @@
+---
+version: "3"
+
+services:
+  demo:
+    image: elixir:1.8
+    entrypoint: tail -f /dev/null
+    restart: always
+    volumes:
+      - folder-sync:/app:nocopy
+    networks:
+      - intnet
+    ports:
+      - "5000:5000"
+
+  syncer:
+    image: eugenmayer/unison:2.51.2.1
+    command: /entrypoint.sh supervisord
+    volumes:
+      - .:/host_sync
+      - folder-sync:/app_sync
+    environment:
+      - HOST_VOLUME=/host_sync
+      - APP_VOLUME=/app_sync
+      - UNISON_SRC=/host_sync
+      - UNISON_DEST=/app_sync
+      - UNISON_DIR=/data
+      - UNISON_ARGS=-ignore='Name _build' -ignore='Name .git' -ignore='Name .circleci' -ignore='Name .github' -prefer /host_sync -numericids -auto -batch
+      - UNISON_WATCH_ARGS=-repeat watch
+      - TZ=Asia/Bangkok
+      - LANG=C.UTF-8
+      - HOME=/root
+      - OWNER_UID=10000 # uid on the container
+      - MONIT_ENABLE=true
+      - MONIT_INTERVAL=5
+      - MONIT_HIGH_CPU_CYCLES=2
+
+  precopy:
+    image: eugenmayer/unison:2.51.2.1
+    command: /entrypoint.sh precopy_appsync
+    volumes:
+      - .:/host_sync
+      - folder-sync:/app_sync
+    environment:
+      - HOST_VOLUME=/host_sync
+      - APP_VOLUME=/app_sync
+      - UNISON_SRC=/host_sync
+      - UNISON_DEST=/app_sync
+      - UNISON_DIR=/data
+      - UNISON_ARGS=-ignore='Name _build' -ignore='Name .git' -ignore='Name .circleci' -ignore='Name .github' -prefer /host_sync -numericids -auto -batch
+      - UNISON_WATCH_ARGS=-repeat watch
+      - TZ=Asia/Bangkok
+      - LANG=C.UTF-8
+      - HOME=/root
+      - OWNER_UID=10000 # uid on the container
+
+networks:
+  intnet:
+
+volumes:
+  folder-sync:
