@@ -5,14 +5,16 @@ defmodule LoadTester.Runner do
   use Chaperon.LoadTest
 
   def default_config do
+    target_base_url = Application.get_env(:load_tester, :target_base_url)
+
     %{
-      base_url: "http://localhost:5000",
+      base_url: target_base_url,
       merge_scenario_sessions: true
     }
   end
 
   def scenarios do
-    num_clients = :load_tester |> Application.get_env(:num_clients)
+    num_clients = Application.get_env(:load_tester, :num_clients)
 
     [
       {{num_clients, LoadTester.Scenarios.Index}, %{}}

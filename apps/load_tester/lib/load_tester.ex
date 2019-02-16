@@ -4,8 +4,9 @@ defmodule LoadTester do
   """
 
   def run do
+    target_base_url = Application.get_env(:load_tester, :target_base_url)
     session = Chaperon.run_load_test(LoadTester.Runner)
-    metrics = Map.get(session.metrics, {:get, "http://localhost:5000/"})
+    metrics = Map.get(session.metrics, {:get, "#{target_base_url}/"})
 
     IO.puts("""
       Load test finished.
