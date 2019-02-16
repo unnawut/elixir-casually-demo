@@ -8,6 +8,9 @@ config :load_tester,
   libcluster_topologies: [
     runners: [
       strategy: Cluster.Strategy.Epmd,
-      config: [hosts: [:"runner@runner-1", :"runner@runner-2"]]
+      config: [hosts: [:"runner@runner-1", :"runner@runner-2"]],
+      connect: {:net_kernel, :connect_node, []},
+      disconnect: {:erlang, :disconnect_node, []},
+      list_nodes: {:erlang, :nodes, [:connected]}
     ]
   ]
