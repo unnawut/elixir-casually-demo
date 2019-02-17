@@ -64,6 +64,7 @@ LoadTester.run("http://server-1:5000")
 - runner-2: n1-standard-1 (1 vCPU, 3.75 GB memory)
 - runner-3: n1-standard-1 (1 vCPU, 3.75 GB memory)
 - runner-4: n1-standard-1 (1 vCPU, 3.75 GB memory)
+- runner-5: n1-standard-1 (1 vCPU, 3.75 GB memory)
 
 ### Summarized results
 
@@ -302,12 +303,12 @@ Test setup:
   - Total requests:  80000 requests
 
 Results:
-  - Average response time:  84.0201875 ms
+  - Average response time:  33.997925 ms
   - Min response time:      1 ms
-  - 75th percentile:        108 ms
-  - 90th percentile:        132 ms
-  - 95th percentile:        141 ms
-  - Max response time:      3151 ms
+  - 75th percentile:        42 ms
+  - 90th percentile:        51 ms
+  - 95th percentile:        59 ms
+  - Max response time:      166 ms
 ```
 
 #### Elixir + Phoenix @ 9000 req/s
@@ -319,12 +320,12 @@ Test setup:
   - Total requests:  90000 requests
 
 Results:
-  - Average response time:  130.22454444444443 ms
+  - Average response time:  18.936433333333333 ms
   - Min response time:      0 ms
-  - 75th percentile:        173 ms
-  - 90th percentile:        482 ms
-  - 95th percentile:        516 ms
-  - Max response time:      689 ms
+  - 75th percentile:        27 ms
+  - 90th percentile:        37 ms
+  - 95th percentile:        44 ms
+  - Max response time:      255 ms
 ```
 
 #### Ruby @ 9000 req/s
@@ -336,10 +337,44 @@ Test setup:
   - Total requests:  90000 requests
 
 Results:
-  - Average response time:  292.67334444444447 ms
+  - Average response time:  55.67016666666667 ms
   - Min response time:      1 ms
-  - 75th percentile:        225 ms
-  - 90th percentile:        984 ms
-  - 95th percentile:        1113 ms
-  - Max response time:      7503 ms
+  - 75th percentile:        67 ms
+  - 90th percentile:        82 ms
+  - 95th percentile:        92 ms
+  - Max response time:      1182 ms
+```
+
+#### Elixir + Phoenix @ 10000 req/s
+
+```
+Test setup:
+  - Rate:            10000 req/s
+  - Duration:        10 seconds
+  - Total requests:  100000 requests
+
+Results:
+  - Average response time:  33.39275 ms
+  - Min response time:      0 ms
+  - 75th percentile:        48 ms
+  - 90th percentile:        67 ms
+  - 95th percentile:        83 ms
+  - Max response time:      275 ms
+```
+
+#### Ruby @ 10000 req/s
+
+```
+Test setup:
+  - Rate:            10000 req/s
+  - Duration:        10 seconds
+  - Total requests:  100000 requests
+
+Results:
+  - Average response time:  138.56116 ms
+  - Min response time:      1 ms
+  - 75th percentile:        114 ms
+  - 90th percentile:        152 ms
+  - 95th percentile:        1038 ms
+  - Max response time:      7227 ms
 ```
