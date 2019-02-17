@@ -17,8 +17,8 @@ chmod u+x installer.sh server.sh
 ```shell
 git clone git@github.com:unnawut/elixir-demo.git
 cd elixir-demo/
-chmod u+x installer.sh runner-1.sh
-./runner-1.sh
+chmod u+x installer.sh runner-master.sh
+./runner-master.sh
 ```
 
 Then once inside `iex`, execute:
@@ -32,8 +32,8 @@ Chaperon.Master.start()
 ```shell
 git clone git@github.com:unnawut/elixir-demo.git
 cd elixir-demo/
-chmod u+x installer.sh runner-*.sh
-./runner-<your_runner_number>.sh
+chmod u+x installer.sh runner-slave.sh
+./runner-slave.sh
 ```
 
 4. Run the test from the master:
