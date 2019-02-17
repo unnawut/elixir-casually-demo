@@ -68,8 +68,17 @@ LoadTester.run("http://server-1:5000")
 
 ### Summarized results
 
-| Req/s | Duration (s) | Requests | Min response time | Elixir (95th) | Ruby (95th) | Elixir (100th) | Ruby (100th)
-| 2,000 | 10 | 20,000 | 3ms | 0ms
+| Req/s | Min - Ex | Min - Ruby | 95th - Ex | 95th - Rb | Max - Ex | Max - Rb |
+| ----: | -------: | ---------: | --------: | --------: | -------: | -------: |
+| 2,000 | 0 ms | 1 ms | 3 ms | 4 ms | 50 ms | 29 ms |
+| 3,000 | 0 ms | 1 ms | 3 ms | 5 ms | 149 ms | 74 ms |
+| 4,000 | 0 ms | 1 ms | 5 ms | 6 ms | 177 ms | 93 ms |
+| 5,000 | 0 ms | 1 ms | 8 ms | 11 ms | 96 ms | 120 ms |
+| 6,000 | 0 ms | 1 ms | 4 ms | 19 ms | 144 ms | 126 ms |
+| 7,000 | 0 ms | 1 ms | 8 ms | 35 ms | 167 ms | 146 ms |
+| 8,000 | 0 ms | 1 ms | 21 ms | 59 ms | 209 ms | 166 ms |
+| 9,000 | 0 ms | 1 ms | 44 ms | 92 ms | 255 ms | 1,182 ms |
+| 10,000 | 0 ms | 1 ms | 83 ms | 1,038 ms | 275 ms | 7,227 ms |
 
 ### Raw results
 
@@ -99,12 +108,12 @@ Test setup:
   - Total requests:  20000 requests
 
 Results:
-  - Average response time:  2.7342 ms
+  - Average response time:  2.3539 ms
   - Min response time:      1 ms
   - 75th percentile:        3 ms
   - 90th percentile:        3 ms
   - 95th percentile:        4 ms
-  - Max response time:      129 ms
+  - Max response time:      29 ms
 ```
 
 #### Elixir + Phoenix @ 3000 req/s
@@ -167,12 +176,12 @@ Test setup:
   - Total requests:  40000 requests
 
 Results:
-  - Average response time:  5.2185 ms
+  - Average response time:  3.5105 ms
   - Min response time:      1 ms
-  - 75th percentile:        5 ms
-  - 90th percentile:        7 ms
-  - 95th percentile:        10 ms
-  - Max response time:      123 ms
+  - 75th percentile:        4 ms
+  - 90th percentile:        5 ms
+  - 95th percentile:        6 ms
+  - Max response time:      93 ms
 ```
 
 #### Elixir + Phoenix @ 5000 req/s
@@ -184,12 +193,12 @@ Test setup:
   - Total requests:  50000 requests
 
 Results:
-  - Average response time:  12.27928 ms
+  - Average response time:  4.64306 ms
   - Min response time:      0 ms
-  - 75th percentile:        16 ms
-  - 90th percentile:        36 ms
-  - 95th percentile:        44 ms
-  - Max response time:      251 ms
+  - 75th percentile:        5 ms
+  - 90th percentile:        7 ms
+  - 95th percentile:        8 ms
+  - Max response time:      96 ms
 ```
 
 #### Ruby @ 5000 req/s
@@ -201,12 +210,12 @@ Test setup:
   - Total requests:  50000 requests
 
 Results:
-  - Average response time:  13.71074 ms
+  - Average response time:  5.31182 ms
   - Min response time:      1 ms
-  - 75th percentile:        16 ms
-  - 90th percentile:        29 ms
-  - 95th percentile:        35 ms
-  - Max response time:      151 ms
+  - 75th percentile:        6 ms
+  - 90th percentile:        8 ms
+  - 95th percentile:        11 ms
+  - Max response time:      120 ms
 ```
 
 #### Elixir + Phoenix @ 6000 req/s
@@ -218,12 +227,12 @@ Test setup:
   - Total requests:  60000 requests
 
 Results:
-  - Average response time:  20.1891 ms
+  - Average response time:  2.5674 ms
   - Min response time:      0 ms
-  - 75th percentile:        27 ms
-  - 90th percentile:        38 ms
-  - 95th percentile:        46 ms
-  - Max response time:      305 ms
+  - 75th percentile:        2 ms
+  - 90th percentile:        3 ms
+  - 95th percentile:        4 ms
+  - Max response time:      144 ms
 ```
 
 #### Ruby @ 6000 req/s
@@ -235,12 +244,12 @@ Test setup:
   - Total requests:  60000 requests
 
 Results:
-  - Average response time:  23.746983333333333 ms
+  - Average response time:  8.98935 ms
   - Min response time:      1 ms
-  - 75th percentile:        29 ms
-  - 90th percentile:        37 ms
-  - 95th percentile:        42 ms
-  - Max response time:      1048 ms
+  - 75th percentile:        10 ms
+  - 90th percentile:        15 ms
+  - 95th percentile:        19 ms
+  - Max response time:      126 ms
 ```
 
 #### Elixir + Phoenix @ 7000 req/s
@@ -252,12 +261,12 @@ Test setup:
   - Total requests:  70000 requests
 
 Results:
-  - Average response time:  15.102914285714286 ms
+  - Average response time:  3.9796428571428573 ms
   - Min response time:      0 ms
-  - 75th percentile:        20 ms
-  - 90th percentile:        30 ms
-  - 95th percentile:        35 ms
-  - Max response time:      259 ms
+  - 75th percentile:        4 ms
+  - 90th percentile:        6 ms
+  - 95th percentile:        8 ms
+  - Max response time:      167 ms
 ```
 
 #### Ruby @ 7000 req/s
@@ -269,12 +278,12 @@ Test setup:
   - Total requests:  70000 requests
 
 Results:
-  - Average response time:  47.79398571428571 ms
+  - Average response time:  18.74767142857143 ms
   - Min response time:      1 ms
-  - 75th percentile:        61 ms
-  - 90th percentile:        71 ms
-  - 95th percentile:        79 ms
-  - Max response time:      207 ms
+  - 75th percentile:        23 ms
+  - 90th percentile:        31 ms
+  - 95th percentile:        35 ms
+  - Max response time:      146 ms
 ```
 
 #### Elixir + Phoenix @ 8000 req/s
@@ -286,12 +295,12 @@ Test setup:
   - Total requests:  80000 requests
 
 Results:
-  - Average response time:  31.4483625 ms
+  - Average response time:  8.44565 ms
   - Min response time:      0 ms
-  - 75th percentile:        45 ms
-  - 90th percentile:        61 ms
-  - 95th percentile:        75 ms
-  - Max response time:      299 ms
+  - 75th percentile:        10 ms
+  - 90th percentile:        16 ms
+  - 95th percentile:        21 ms
+  - Max response time:      209 ms
 ```
 
 #### Ruby @ 8000 req/s
