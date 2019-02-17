@@ -51,10 +51,15 @@ LoadTester.run("http://server-1:5000")
 ## Things to demo (hopefully)
 
 - Pipes
-- Pattern matching
+- Pattern matching & guards
 - Umbrella & subapps
+- Immutability
 - GenServer
+- Supervisor
+- `with` statement
+- Function shorthand
 - Swarm & clustering
+- Auto spin up/down lots of load runners + node auto-discovery
 
 ## Test results
 
