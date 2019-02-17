@@ -1,3 +1,0 @@
-# ElixirDemo
-
-**TODO: Add description**
