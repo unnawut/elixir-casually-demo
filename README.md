@@ -86,3 +86,8 @@ See [Raw results](raw_results.md) for more details.
 - Function shorthand
 - Swarm & clustering
 - Auto spin up lots of load runners + node auto-discovery + test running + spin down
+
+## Noteworthy
+
+- Elixir core is written mostly (90%) in Elixir: https://github.com/elixir-lang/elixir
+- https://www.thairath.co.th/content/1498811?fbclid=IwAR3IM7bMWpW6iMlxuZeFp9w_DOqyrUOV8gtTIXJDtfhMv4E98zDmhxVPhjI
