@@ -40,7 +40,8 @@ defmodule ElixirCasuallyWeb.MixProject do
       {:phoenix, "~> 1.4.0"},
       {:elixir_casually, in_umbrella: true},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:timex, "~> 3.5"}
     ]
   end
 

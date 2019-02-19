@@ -76,16 +76,13 @@ See [Raw results](raw_results.md) for more details.
 
 ## Things to demo (hopefully)
 
-- Pipes
-- Pattern matching & guards
-- Umbrella & subapps
-- Immutability
-- GenServer
-- Supervisor
-- `with` statement
-- Function shorthand
-- Swarm & clustering
-- Auto spin up lots of load runners + node auto-discovery + test running + spin down
+- [x] Pipes
+- [x] Immutability
+- [x] Pattern matching & guards
+- [x] Umbrella apps & subapps
+- [x] GenServer
+- [x] Supervisor
+- [ ] Swarm & clustering, auto spin up lots of load runners + node auto-discovery + test running + spin down
 
 ## Noteworthy
 
