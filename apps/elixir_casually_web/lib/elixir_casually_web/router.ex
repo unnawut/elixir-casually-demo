@@ -6,5 +6,9 @@ defmodule ElixirCasuallyWeb.Router do
 
     get("/votes", VoteController, :index)
     post("/votes", VoteController, :create)
+
+    get("/crash", CrashController, :total)
+    get("/crash/voter", CrashController, :voter)
+    get("/crash/vote_count", CrashController, :vote_count)
   end
 end
