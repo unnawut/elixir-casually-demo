@@ -14,7 +14,7 @@ INSTANCE_NAMES=(
     "elixir-casually-runner-slave-9"
 )
 
-for NAME in INSTANCE_NAMES
+for NAME in $INSTANCE_NAMES
 do
   gcloud compute instances delete "$NAME" \
     --zone asia-southeast1-b \
