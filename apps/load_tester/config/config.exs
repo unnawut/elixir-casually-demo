@@ -10,6 +10,7 @@ config :load_tester,
       strategy: Cluster.Strategy.Epmd,
       config: [
         hosts: [
+          :"runner@elixir-casually-master",
           :"runner@elixir-casually-runner-1",
           :"runner@elixir-casually-runner-2",
           :"runner@elixir-casually-runner-3",
