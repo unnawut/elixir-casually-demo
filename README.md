@@ -95,7 +95,7 @@ Thanks to these fellas for making this meetup happen and their support in buildi
 
 - Adhapol Vinn
 - Pallop Chao
-- Panumarch Anantachaiwanich
+- [Panumarch Anantachaiwanich](https://github.com/turboza)
 - Pii Boonchokchuay
 - Pongsatorn Paewsoongnern
 - Ranatchai Chernbamrung
