@@ -1,4 +1,4 @@
-defmodule ElixirCasuallyDemoWeb.MainController do
+defmodule ElixirCasuallyDemoWeb.HelloController do
   use ElixirCasuallyDemoWeb, :controller
 
   def index(conn, _attrs) do

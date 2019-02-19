@@ -2,6 +2,9 @@ defmodule ElixirCasuallyDemoWeb.Router do
   use ElixirCasuallyDemoWeb, :router
 
   scope "/", ElixirCasuallyDemoWeb do
-    get("/", MainController, :index)
+    get("/", HelloController, :index)
+
+    get("/votes", VoteController, :index)
+    post("/votes", VoteController, :create)
   end
 end
