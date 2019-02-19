@@ -9,6 +9,7 @@ defmodule ElixirCasually.Application do
     children = [
       {ElixirCasually.VoterRegistry, name: ElixirCasually.VoterRegistry},
       {ElixirCasually.VoteCountRegistry, name: ElixirCasually.VoteCountRegistry},
+      {ElixirCasually.PeriodicInspector, name: ElixirCasually.PeriodicInspector},
     ]
 
     Supervisor.start_link(children, strategy: :one_for_one, name: ElixirCasually.Supervisor)
