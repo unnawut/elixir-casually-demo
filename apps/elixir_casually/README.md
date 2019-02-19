@@ -1,3 +1,3 @@
-# ElixirCasuallyDemo
+# ElixirCasually
 
 **TODO: Add description**

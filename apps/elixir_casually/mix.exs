@@ -1,9 +1,9 @@
-defmodule ElixirCasuallyDemo.MixProject do
+defmodule ElixirCasually.MixProject do
   use Mix.Project
 
   def project do
     [
-      app: :elixir_casually_demo,
+      app: :elixir_casually,
       version: "0.1.0",
       build_path: "../../_build",
       config_path: "../../config/config.exs",
@@ -22,7 +22,7 @@ defmodule ElixirCasuallyDemo.MixProject do
   # Type `mix help compile.app` for more information.
   def application do
     [
-      mod: {ElixirCasuallyDemo.Application, []},
+      mod: {ElixirCasually.Application, []},
       extra_applications: [:logger, :runtime_tools]
     ]
   end

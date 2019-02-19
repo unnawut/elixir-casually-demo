@@ -1,4 +1,4 @@
-defmodule ElixirCasuallyDemo.Umbrella.MixProject do
+defmodule ElixirCasually.Umbrella.MixProject do
   use Mix.Project
 
   def project do

@@ -1,4 +1,4 @@
-defmodule ElixirCasuallyDemo.Application do
+defmodule ElixirCasually.Application do
   # See https://hexdocs.pm/elixir/Application.html
   # for more information on OTP Applications
   @moduledoc false
@@ -8,6 +8,6 @@ defmodule ElixirCasuallyDemo.Application do
   def start(_type, _args) do
     children = []
 
-    Supervisor.start_link(children, strategy: :one_for_one, name: ElixirCasuallyDemo.Supervisor)
+    Supervisor.start_link(children, strategy: :one_for_one, name: ElixirCasually.Supervisor)
   end
 end

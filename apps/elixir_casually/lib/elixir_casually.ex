@@ -1,6 +1,6 @@
-defmodule ElixirCasuallyDemo do
+defmodule ElixirCasually do
   @moduledoc """
-  ElixirCasuallyDemo keeps the contexts that define your domain
+  ElixirCasually keeps the contexts that define your domain
   and business logic.
 
   Contexts are also responsible for managing your data, regardless

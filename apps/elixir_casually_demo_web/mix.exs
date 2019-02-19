@@ -38,7 +38,7 @@ defmodule ElixirCasuallyDemoWeb.MixProject do
   defp deps do
     [
       {:phoenix, "~> 1.4.0"},
-      {:elixir_casually_demo, in_umbrella: true},
+      {:elixir_casually, in_umbrella: true},
       {:jason, "~> 1.0"},
       {:plug_cowboy, "~> 2.0"}
     ]

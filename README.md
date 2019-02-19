@@ -1,4 +1,4 @@
-# ElixirCasuallyDemo.Umbrella
+# ElixirCasually.Umbrella
 
 ## Instructions
 
