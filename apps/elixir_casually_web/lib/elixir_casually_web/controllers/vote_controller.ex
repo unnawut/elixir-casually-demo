@@ -1,15 +1,20 @@
 defmodule ElixirCasuallyWeb.VoteController do
   use ElixirCasuallyWeb, :controller
-  alias ElixirCasually.Vote
+  alias ElixirCasually.{VoteCountRegistry, VoterRegistry}
 
   def index(conn, _attrs) do
-    text(conn, "")
+    vote_counts = VoteCountRegistry.all()
+
+    json(conn, vote_counts)
   end
 
-  def create(conn, attrs) do
-    citizen_id = attrs["citizen_id"]
-    vote_number = attrs["vote_number"]
-
-    %Vote{}
+  def create(conn, %{"citizen_id" => cid, "vote_number" => partynum}) do
+    with {:ok, _} <- VoterRegistry.register(cid),
+         {:ok, count} <- VoteCountRegistry.increment(partynum) do
+      json(conn, %{status: true})
+    else
+      {:error, code} ->
+        json(conn, %{status: false, error: code})
+    end
   end
 end

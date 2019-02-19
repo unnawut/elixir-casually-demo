@@ -7,5 +7,12 @@ defmodule ElixirCasuallyWeb.Endpoint do
     plug Phoenix.CodeReloader
   end
 
+  plug(
+    Plug.Parsers,
+    parsers: [:urlencoded, :multipart, :json],
+    pass: ["*/*"],
+    json_decoder: Poison
+  )
+
   plug ElixirCasuallyWeb.Router
 end
