@@ -88,3 +88,16 @@ See [Raw results](raw_results.md) for more details.
 
 - Elixir core is written mostly (90%) in Elixir: https://github.com/elixir-lang/elixir
 - https://www.thairath.co.th/content/1498811?fbclid=IwAR3IM7bMWpW6iMlxuZeFp9w_DOqyrUOV8gtTIXJDtfhMv4E98zDmhxVPhjI
+
+## Credits
+
+Thanks to these fellas for making this meetup happen and their support in building this demo:
+
+- Adhapol Vinn
+- Pallop Chao
+- Panumarch Anantachaiwanich
+- Pii Boonchokchuay
+- Pongsatorn Paewsoongnern
+- Ranatchai Chernbamrung
+- Supanat IBoss Potiwarakorn
+- Wasawat Somno
