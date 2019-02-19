@@ -7,6 +7,7 @@ defmodule LoadTester.Application do
 
     children = [
       {Cluster.Supervisor, [topologies, [name: LoadTester.ClusterSupervisor]]},
+      {LoadTester, name: LoadTester},
     ]
 
     opts = [strategy: :one_for_one, name: LoadTester.Supervisor]
