@@ -1,5 +1,5 @@
-defmodule ElixirCasuallyDemoWeb.ErrorView do
-  use ElixirCasuallyDemoWeb, :view
+defmodule ElixirCasuallyWeb.ErrorView do
+  use ElixirCasuallyWeb, :view
 
   # If you want to customize a particular status code
   # for a certain format, you may uncomment below.

@@ -1,4 +1,4 @@
-# ElixirCasuallyDemoWeb
+# ElixirCasuallyWeb
 
 To start your Phoenix server:
 

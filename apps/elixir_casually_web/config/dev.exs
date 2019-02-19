@@ -1,6 +1,6 @@
 use Mix.Config
 
-config :elixir_casually_demo_web, ElixirCasuallyDemoWeb.Endpoint,
+config :elixir_casually_web, ElixirCasuallyWeb.Endpoint,
   http: [port: 5000],
   debug_errors: true,
   code_reloader: true,

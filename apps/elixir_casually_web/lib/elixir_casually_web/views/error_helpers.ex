@@ -1,4 +1,4 @@
-defmodule ElixirCasuallyDemoWeb.ErrorHelpers do
+defmodule ElixirCasuallyWeb.ErrorHelpers do
   @moduledoc """
   Conveniences for translating and building error messages.
   """

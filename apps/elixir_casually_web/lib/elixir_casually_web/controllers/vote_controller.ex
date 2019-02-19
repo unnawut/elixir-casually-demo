@@ -1,5 +1,5 @@
-defmodule ElixirCasuallyDemoWeb.VoteController do
-  use ElixirCasuallyDemoWeb, :controller
+defmodule ElixirCasuallyWeb.VoteController do
+  use ElixirCasuallyWeb, :controller
   alias ElixirCasually.Vote
 
   def index(conn, _attrs) do

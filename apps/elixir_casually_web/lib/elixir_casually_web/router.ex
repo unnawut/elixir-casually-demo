@@ -1,7 +1,7 @@
-defmodule ElixirCasuallyDemoWeb.Router do
-  use ElixirCasuallyDemoWeb, :router
+defmodule ElixirCasuallyWeb.Router do
+  use ElixirCasuallyWeb, :router
 
-  scope "/", ElixirCasuallyDemoWeb do
+  scope "/", ElixirCasuallyWeb do
     get("/", HelloController, :index)
 
     get("/votes", VoteController, :index)

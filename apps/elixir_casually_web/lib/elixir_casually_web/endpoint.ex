@@ -1,5 +1,5 @@
-defmodule ElixirCasuallyDemoWeb.Endpoint do
-  use Phoenix.Endpoint, otp_app: :elixir_casually_demo_web
+defmodule ElixirCasuallyWeb.Endpoint do
+  use Phoenix.Endpoint, otp_app: :elixir_casually_web
 
   # Code reloading can be explicitly enabled under the
   # :code_reloader configuration of your endpoint.
@@ -7,5 +7,5 @@ defmodule ElixirCasuallyDemoWeb.Endpoint do
     plug Phoenix.CodeReloader
   end
 
-  plug ElixirCasuallyDemoWeb.Router
+  plug ElixirCasuallyWeb.Router
 end

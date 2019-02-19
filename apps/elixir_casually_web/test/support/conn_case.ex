@@ -1,4 +1,4 @@
-defmodule ElixirCasuallyDemoWeb.ConnCase do
+defmodule ElixirCasuallyWeb.ConnCase do
   @moduledoc """
   This module defines the test case to be used by
   tests that require setting up a connection.
@@ -19,10 +19,10 @@ defmodule ElixirCasuallyDemoWeb.ConnCase do
     quote do
       # Import conveniences for testing with connections
       use Phoenix.ConnTest
-      alias ElixirCasuallyDemoWeb.Router.Helpers, as: Routes
+      alias ElixirCasuallyWeb.Router.Helpers, as: Routes
 
       # The default endpoint for testing
-      @endpoint ElixirCasuallyDemoWeb.Endpoint
+      @endpoint ElixirCasuallyWeb.Endpoint
     end
   end
 
