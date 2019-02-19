@@ -36,6 +36,10 @@ defmodule ElixirCasually.VoterRegistry do
     GenServer.call(__MODULE__, {:register, citizen_id})
   end
 
+  def crash() do
+    GenServer.call(__MODULE__, :not_exists)
+  end
+
   #
   # Server callbacks
   #
