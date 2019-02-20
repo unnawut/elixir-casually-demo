@@ -17,7 +17,7 @@ defmodule LoadTester.Runner do
     num_clients = Application.get_env(:load_tester, :num_clients)
 
     [
-      {{num_clients, LoadTester.Scenarios.Index}, %{}}
+      {{num_clients, LoadTester.Scenarios.VoteRandom}, %{}}
     ]
   end
 end

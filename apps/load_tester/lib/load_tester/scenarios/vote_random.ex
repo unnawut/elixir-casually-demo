@@ -1,4 +1,4 @@
-defmodule LoadTester.Scenarios.Index do
+defmodule LoadTester.Scenarios.VoteRandom do
   @moduledoc """
   Test scenario for the root endpoint.
   """
@@ -24,6 +24,6 @@ defmodule LoadTester.Scenarios.Index do
   end
 
   def do_run(session) do
-    get(session, "/")
+    get(session, "/vote_random")
   end
 end
