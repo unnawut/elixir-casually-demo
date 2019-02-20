@@ -16,7 +16,7 @@ defmodule ElixirCasuallyWeb.VoteController do
   def create(conn, %{"citizen_id" => cid, "vote_number" => partynum}) do
     with {:ok, _} <- VoterRegistry.register(cid),
          {:ok, _} <- Counter.increment(partynum) do
-      json(conn, %{success: true})
+      json(conn, %{success: true, voted: partynum})
     else
       {:error, code} ->
         json(conn, %{success: false, error: code})

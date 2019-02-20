@@ -8,11 +8,11 @@ defmodule ElixirCasuallyWeb.MainController do
           <title>ElixirCasually Vote Me</title>
         </head>
         <body>
-          <h1>Vote Me</h1>
+          <h1>ElixirCasually Vote Me</h1>
           <h2>Be nice</h2>
           <ul>
-            <li><a href="votes">Vote Summary</a></li>
-            <li><a href="vote_random">Vote Randomly</a></li>
+            <li><a href="votes">Vote summary</a></li>
+            <li><a href="vote_random">Vote randomly</a></li>
             <li><a href="slides">View slides</a></li>
           </ul>
           <h2>Destroy things</h2>
@@ -20,6 +20,7 @@ defmodule ElixirCasuallyWeb.MainController do
             <li><a href="crash/voter">Crash Voter</a></li>
             <li><a href="crash/counter">Crash Counter</a></li>
             <li><a href="crash">Crash Controller</a></li>
+            <li><a href="crash/sleep">Sleep 5s then crash</a></li>
           </ul>
         </body>
       </html>

@@ -1,18 +1,20 @@
 defmodule ElixirCasuallyWeb.CrashController do
   use ElixirCasuallyWeb, :controller
 
-  def total(conn, _attrs) do
+  def controller(_, _) do
     _ = 1/0
-    json(conn, %{success: true})
   end
 
-  def voter(conn, _attrs) do
+  def voter(_, _) do
     ElixirCasually.VoterRegistry.crash()
-    json(conn, %{success: true})
   end
 
-  def counter(conn, _attrs) do
+  def counter(_, _) do
     ElixirCasually.Counter.crash()
-    json(conn, %{success: true})
+  end
+
+  def sleep(_, _) do
+    Process.sleep(5_000)
+    _ = 1/0
   end
 end
