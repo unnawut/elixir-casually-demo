@@ -7,7 +7,8 @@ gcloud compute instances create elixir-casually-server-1 \
   --image elixir-casually-elixir-ruby-go \
   --zone asia-southeast1-b \
   --machine-type=n1-standard-2 \
-  --local-ssd interface=nvme \
+  --address 35.185.178.82 \
+  --tags elixir-server \
   --metadata enable-oslogin=TRUE \
   --metadata-from-file startup-script="$CURDIR/provision-server.sh"
 
@@ -16,6 +17,7 @@ gcloud compute instances create "elixir-casually-runner-master" \
   --image elixir-casually-elixir-ruby-go \
   --zone asia-southeast1-b \
   --machine-type=n1-standard-2 \
+  --address 35.197.134.146 \
   --metadata enable-oslogin=TRUE \
   --metadata-from-file startup-script="$CURDIR/provision-runner-master.sh"
 
