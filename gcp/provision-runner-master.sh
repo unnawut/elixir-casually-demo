@@ -4,8 +4,10 @@
 # Shared provisioning
 #
 
-sudo su tuwannu_gmail_com
 export HOME=/home/tuwannu_gmail_com
+
+touch /var/log/elixir-casually.log
+chmod a+rw /var/log/elixir-casually.log
 
 mkdir -p /home/tuwannu_gmail_com/elixir-casually-demo
 cd /home/tuwannu_gmail_com/elixir-casually-demo
@@ -19,9 +21,13 @@ mix local.hex --force
 mix local.rebar --force
 mix deps.get
 
+chown -R tuwannu_gmail_com .
+
 #
 # Specific provisioning
 #
 
-elixir --sname "runner" --cookie "elixir-casually-demo" \
-  -S mix run -e 'Chaperon.Master.start()' --no-halt &
+# Chaperon.Master.start()
+# Application.put_env(:load_tester, :num_clients, 500)
+# cd elixir-casually-demo
+# iex --sname "runner" --cookie "elixir-casually" -S mix run -e 'Chaperon.Master.start()' --no-halt &
