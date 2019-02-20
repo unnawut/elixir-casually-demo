@@ -45,8 +45,7 @@ defmodule ElixirCasually.VoterRegistry do
   #
 
   def init(_opts) do
-    name = :ets.new(:voters, [:named_table])
-    {:ok, name}
+    {:ok, nil}
   end
 
   def handle_call({:register, citizen_id}, _from, state) do

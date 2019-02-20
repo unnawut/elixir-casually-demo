@@ -1,4 +1,4 @@
-defmodule ElixirCasually.CounterRegistry do
+defmodule ElixirCasually.Counter do
   use GenServer
 
   #
@@ -20,12 +20,12 @@ defmodule ElixirCasually.CounterRegistry do
     end_of_table = :"$end_of_table"
 
     Stream.resource(
-      fn -> :ets.first(:vote_counter) end,
+      fn -> :ets.first(:counter) end,
       fn ^end_of_table ->
           {:halt, nil}
          key ->
-          [{key, count}] = :ets.lookup(:vote_counter, key)
-          {[{key, count}], :ets.next(:vote_counter, key)}
+          [{key, count}] = :ets.lookup(:counter, key)
+          {[{key, count}], :ets.next(:counter, key)}
       end,
       fn _ -> :ok end
     )
@@ -48,13 +48,12 @@ defmodule ElixirCasually.CounterRegistry do
   #
 
   def init(_opts) do
-    name = :ets.new(:vote_counter, [:named_table])
-    {:ok, name}
+    {:ok, nil}
   end
 
   def handle_call({:get, vote_number}, _from, state) do
     result =
-      case :ets.lookup(:vote_counter, vote_number) do
+      case :ets.lookup(:counter, vote_number) do
         [{^vote_number, vote_count}] -> {:ok, vote_count}
         [] -> {:error, :vote_number_not_found}
       end
@@ -63,7 +62,7 @@ defmodule ElixirCasually.CounterRegistry do
   end
 
   def handle_call({:increment, vote_number}, _from, state) do
-    result = {:ok, :ets.update_counter(:vote_counter, vote_number, 1, {vote_number, 0})}
+    result = {:ok, :ets.update_counter(:counter, vote_number, 1, {vote_number, 0})}
 
     {:reply, result, state}
   end

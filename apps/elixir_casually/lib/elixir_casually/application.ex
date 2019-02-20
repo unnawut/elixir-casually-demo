@@ -6,9 +6,12 @@ defmodule ElixirCasually.Application do
   use Application
 
   def start(_type, _args) do
+    _ = :ets.new(:voters, [:set, :public, :named_table])
+    _ = :ets.new(:counter, [:set, :public, :named_table])
+
     children = [
       {ElixirCasually.VoterRegistry, name: ElixirCasually.VoterRegistry},
-      {ElixirCasually.CounterRegistry, name: ElixirCasually.CounterRegistry},
+      {ElixirCasually.Counter, name: ElixirCasually.Counter},
       {ElixirCasually.PeriodicInspector, name: ElixirCasually.PeriodicInspector},
     ]
 

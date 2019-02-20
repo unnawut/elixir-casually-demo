@@ -11,8 +11,8 @@ defmodule ElixirCasuallyWeb.CrashController do
     json(conn, %{success: true})
   end
 
-  def vote_count(conn, _attrs) do
-    ElixirCasually.VoterRegistry.crash()
+  def counter(conn, _attrs) do
+    ElixirCasually.Counter.crash()
     json(conn, %{success: true})
   end
 end

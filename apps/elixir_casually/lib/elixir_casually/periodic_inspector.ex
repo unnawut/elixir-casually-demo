@@ -1,6 +1,6 @@
 defmodule ElixirCasually.PeriodicInspector do
   use GenServer
-  alias ElixirCasually.{CounterRegistry, VoterRegistry}
+  alias ElixirCasually.{Counter, VoterRegistry}
 
   #
   # Client API
@@ -38,6 +38,16 @@ defmodule ElixirCasually.PeriodicInspector do
   defp iex?, do: IEx.started?()
 
   defp inspect_server do
-    IO.puts("VoterRegistry #{inspect(Process.whereis(VoterRegistry))}, CounterRegistry #{inspect(Process.whereis(CounterRegistry))}")
+    ""
+    |> Kernel.<>("Voters: #{length(VoterRegistry.all())}, ")
+    |> Kernel.<>("Counts: #{Counter.all() |> Map.values() |> Enum.sum()}, ")
+    |> Kernel.<>("VoterRegistry #{inspect(Process.whereis(VoterRegistry))}, ")
+    |> Kernel.<>("Counter #{inspect(Process.whereis(Counter))}")
+    |> IO.puts()
+
+    Counter.all()
+    |> Enum.each(fn {vote_number, count} ->
+      IO.puts("  #{vote_number}: #{count}")
+    end)
   end
 end

@@ -1,11 +1,11 @@
 defmodule ElixirCasuallyWeb.VoteController do
   use ElixirCasuallyWeb, :controller
-  alias ElixirCasually.{CounterRegistry, VoterRegistry}
+  alias ElixirCasually.{Counter, VoterRegistry}
 
   def index(conn, _attrs) do
     result =
       %{}
-      |> Map.put(:counts, CounterRegistry.all())
+      |> Map.put(:counts, Counter.all())
       |> Map.put(:voters, VoterRegistry.all())
       |> Map.put(:time_remaining, get_time_remaining())
       |> Map.put(:success, true)
@@ -15,12 +15,16 @@ defmodule ElixirCasuallyWeb.VoteController do
 
   def create(conn, %{"citizen_id" => cid, "vote_number" => partynum}) do
     with {:ok, _} <- VoterRegistry.register(cid),
-         {:ok, _} <- CounterRegistry.increment(partynum) do
+         {:ok, _} <- Counter.increment(partynum) do
       json(conn, %{success: true})
     else
       {:error, code} ->
         json(conn, %{success: false, error: code})
     end
+  end
+
+  def vote_random(conn, _) do
+    create(conn, %{"citizen_id" => :rand.uniform(69_000_000), "vote_number" => "N#{:rand.uniform(3)}"})
   end
 
   defp get_time_remaining do

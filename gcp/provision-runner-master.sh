@@ -23,6 +23,9 @@ mix deps.get
 
 chown -R tuwannu_gmail_com .
 
+cd elixir-casually-demo
+mix compile
+
 # For ease of demoing, we'll exit here. The rest will be run manually.
 exit 0
 
