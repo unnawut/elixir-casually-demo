@@ -13,6 +13,7 @@ defmodule ElixirCasuallyWeb.MainController do
           <ul>
             <li><a href="votes">Vote Summary</a></li>
             <li><a href="vote_random">Vote Randomly</a></li>
+            <li><a href="slides">View slides</a></li>
           </ul>
           <h2>Destroy things</h2>
           <ul>
@@ -23,5 +24,9 @@ defmodule ElixirCasuallyWeb.MainController do
         </body>
       </html>
       """)
+  end
+
+  def slides(conn, _) do
+    redirect(conn, to: "/slides/index.html")
   end
 end

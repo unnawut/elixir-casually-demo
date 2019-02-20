@@ -11,5 +11,7 @@ defmodule ElixirCasuallyWeb.Router do
     get("/crash", CrashController, :total)
     get("/crash/voter", CrashController, :voter)
     get("/crash/counter", CrashController, :counter)
+
+    get("/slides", MainController, :slides)
   end
 end
