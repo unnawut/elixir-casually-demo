@@ -33,4 +33,4 @@ exit 0
 ulimit -n 64000
 cd elixir-casually-demo
 iex --sname "runner" --cookie "elixir-casually" -S mix run -e 'Chaperon.Master.start()'
-LoadTester.run(num_clients: 10)
+LoadTester.run(num_clients: 10, requests_per_sec: 10, duration: 10)

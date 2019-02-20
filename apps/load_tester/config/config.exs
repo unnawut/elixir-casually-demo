@@ -1,9 +1,9 @@
 use Mix.Config
 
 config :load_tester,
-  num_clients: 200,
-  requests_per_client: 100,
-  total_duration: 10,
+  num_clients: 100,
+  requests_per_sec: 10,
+  duration: 10,
   target_base_url: "http://elixir-casually-server-1:5000",
   libcluster_topologies: [
     runners: [

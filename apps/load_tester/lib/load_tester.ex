@@ -9,6 +9,16 @@ defmodule LoadTester do
       n -> Application.put_env(:load_tester, :num_clients, n)
     end
 
+    case Keyword.get(opts, :requests_per_sec) do
+      nil -> :noop
+      n -> Application.put_env(:load_tester, :requests_per_sec, n)
+    end
+
+    case Keyword.get(opts, :duration) do
+      nil -> :noop
+      n -> Application.put_env(:load_tester, :duration, n)
+    end
+
     if base_url do
       :ok = Application.put_env(:load_tester, :target_base_url, base_url)
     end

@@ -5,12 +5,12 @@ defmodule LoadTester.Scenarios.Index do
   use Chaperon.Scenario
 
   def init(session) do
-    requests_per_client = :load_tester |> Application.get_env(:requests_per_client)
-    total_duration = :load_tester |> Application.get_env(:total_duration)
+    requests_per_sec = :load_tester |> Application.get_env(:requests_per_sec)
+    duration = :load_tester |> Application.get_env(:duration)
 
     session
-    |> assign(rate: requests_per_client)
-    |> assign(interval: total_duration)
+    |> assign(rate: requests_per_sec * duration)
+    |> assign(interval: duration)
     |> ok()
   end
 
