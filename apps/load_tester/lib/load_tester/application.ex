@@ -10,6 +10,12 @@ defmodule LoadTester.Application do
       {LoadTester, name: LoadTester},
     ]
 
+    children =
+      case System.get_env("RUNNER_MASTER") do
+        nil -> children
+        _ -> [{Chaperon.Master, []} | children]
+      end
+
     opts = [strategy: :one_for_one, name: LoadTester.Supervisor]
     Supervisor.start_link(children, opts)
   end
