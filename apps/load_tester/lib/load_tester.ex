@@ -3,7 +3,21 @@ defmodule LoadTester do
   Documentation for LoadTester.
   """
 
+  @doc """
+  Runs the load test runner with the given `base_url` and `options`.
+  """
   def run(base_url \\ nil, opts) do
+    LoadTester.Runner
+    |> set_options(base_url, opts)
+    |> run_load()
+    |> report()
+  end
+
+  #
+  # Private functions
+  #
+
+  defp set_options(runner, base_url, opts) do
     case Keyword.get(opts, :num_clients) do
       nil -> :noop
       n -> Application.put_env(:load_tester, :num_clients, n)
@@ -18,13 +32,18 @@ defmodule LoadTester do
       nil -> :noop
       n -> Application.put_env(:load_tester, :duration, n)
     end
+  end
 
-    if base_url do
-      :ok = Application.put_env(:load_tester, :target_base_url, base_url)
-    end
+  defp run_load(runner) do
+    session =
+      case Node.list() do
+        [] -> Chaperon.run_load_test(runner)
+        _ -> Chaperon.Master.run_load_test(runner)
+      end
+  end
 
+  defp report(session) do
     target_base_url = Application.get_env(:load_tester, :target_base_url)
-    session = Chaperon.Master.run_load_test(LoadTester.Runner)
     metrics = Map.get(session.metrics, {:get, "#{target_base_url}/"})
 
     IO.puts("""
