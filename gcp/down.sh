@@ -3,15 +3,15 @@
 INSTANCE_NAMES=(
     "elixir-casually-server-1"
     "elixir-casually-runner-master"
-    "elixir-casually-runner-slave-1"
-    "elixir-casually-runner-slave-2"
-    "elixir-casually-runner-slave-3"
-    "elixir-casually-runner-slave-4"
-    "elixir-casually-runner-slave-5"
-    "elixir-casually-runner-slave-6"
-    "elixir-casually-runner-slave-7"
-    "elixir-casually-runner-slave-8"
-    "elixir-casually-runner-slave-9"
+    "elixir-casually-runner-1"
+    "elixir-casually-runner-2"
+    "elixir-casually-runner-3"
+    "elixir-casually-runner-4"
+    "elixir-casually-runner-5"
+    "elixir-casually-runner-6"
+    "elixir-casually-runner-7"
+    "elixir-casually-runner-8"
+    "elixir-casually-runner-9"
 )
 
 for NAME in $INSTANCE_NAMES

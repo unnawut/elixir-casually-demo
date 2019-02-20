@@ -1,6 +1,6 @@
 defmodule ElixirCasually.PeriodicInspector do
   use GenServer
-  alias ElixirCasually.{VoteCountRegistry, VoterRegistry}
+  alias ElixirCasually.{CounterRegistry, VoterRegistry}
 
   #
   # Client API
@@ -21,7 +21,7 @@ defmodule ElixirCasually.PeriodicInspector do
   end
 
   def handle_info(:inspect, state) do
-    if IEx.started?() do
+    if server?() && !iex?() do
       inspect_server()
     end
 
@@ -33,7 +33,11 @@ defmodule ElixirCasually.PeriodicInspector do
     Process.send_after(self(), :inspect, 5_000)
   end
 
+  defp server?, do: Phoenix.Endpoint.server?(:elixir_casually_web, ElixirCasuallyWeb.Endpoint)
+
+  defp iex?, do: IEx.started?()
+
   defp inspect_server do
-    IO.puts("VoterRegistry #{inspect(Process.whereis(VoterRegistry))}, VoteCountRegistry #{inspect(Process.whereis(VoteCountRegistry))}")
+    IO.puts("VoterRegistry #{inspect(Process.whereis(VoterRegistry))}, CounterRegistry #{inspect(Process.whereis(CounterRegistry))}")
   end
 end

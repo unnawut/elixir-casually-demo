@@ -1,4 +1,4 @@
-defmodule ElixirCasually.VoteCountRegistry do
+defmodule ElixirCasually.CounterRegistry do
   use GenServer
 
   #
