@@ -3,9 +3,14 @@ defmodule LoadTester do
   Documentation for LoadTester.
   """
 
-  def run(base_url \\ nil) do
+  def run(base_url \\ nil, opts) do
+    case Keyword.get(opts, :num_clients) do
+      nil -> :noop
+      n -> Application.put_env(:load_tester, :num_clients, n)
+    end
+
     if base_url do
-      Application.put_env(:load_tester, :target_base_url, base_url)
+      :ok = Application.put_env(:load_tester, :target_base_url, base_url)
     end
 
     target_base_url = Application.get_env(:load_tester, :target_base_url)
