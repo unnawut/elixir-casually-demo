@@ -23,13 +23,14 @@ mix deps.get
 
 chown -R tuwannu_gmail_com .
 
-ulimit -n 64000
+# For ease of demoing, we'll exit here. The rest will be run manually.
+exit 0
 
 #
 # Specific provisioning
 #
 
-# cd elixir-casually-demo
-# iex --sname "runner" --cookie "elixir-casually" -S mix run -e 'Chaperon.Master.start()'
-# LoadTester.run()
-# Application.put_env(:load_tester, :num_clients, 500)
+ulimit -n 64000
+cd elixir-casually-demo
+iex --sname "runner" --cookie "elixir-casually" -S mix run -e 'Chaperon.Master.start()'
+LoadTester.run(num_clients: 10)
