@@ -19,13 +19,13 @@ gcloud compute instances create "elixir-casually-runner-master" \
   --metadata enable-oslogin=TRUE \
   --metadata-from-file startup-script="$CURDIR/provision-runner-master.sh"
 
-for i in {2..6}
+for i in {1..9}
 do
-  gcloud compute instances describe "elixir-casually-runner-slave-$i" --zone asia-southeast1-b >/dev/null 2>&1 || \
-  gcloud compute instances create "elixir-casually-runner-slave-$i" \
+  gcloud compute instances describe "elixir-casually-runner-$i" --zone asia-southeast1-b >/dev/null 2>&1 || \
+  gcloud compute instances create "elixir-casually-runner-$i" \
     --image elixir-casually-elixir-ruby-go \
     --zone asia-southeast1-b \
     --machine-type=n1-standard-2 \
     --metadata enable-oslogin=TRUE \
-    --metadata-from-file startup-script="$CURDIR/provision-runner-slave.sh"
+    --metadata-from-file startup-script="$CURDIR/provision-runner.sh"
 done

@@ -28,4 +28,4 @@ chown -R tuwannu_gmail_com .
 #
 
 elixir --sname "runner" --cookie "elixir-casually" \
-  -S mix run -e 'Chaperon.connect_to_master(:"runner@elixir-casually-runner-master")' > /var/log/elixir-casually.log 2>&1 --no-halt
+  -S mix run --no-halt > /var/log/elixir-casually.log 2>&1

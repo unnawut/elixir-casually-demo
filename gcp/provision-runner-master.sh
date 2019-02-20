@@ -27,7 +27,7 @@ chown -R tuwannu_gmail_com .
 # Specific provisioning
 #
 
-# Chaperon.Master.start()
-# Application.put_env(:load_tester, :num_clients, 500)
 # cd elixir-casually-demo
-# iex --sname "runner" --cookie "elixir-casually" -S mix run -e 'Chaperon.Master.start()' --no-halt &
+# iex --sname "runner" --cookie "elixir-casually" -S mix run -e 'Chaperon.Master.start()'
+# LoadTester.run()
+# Application.put_env(:load_tester, :num_clients, 500)
