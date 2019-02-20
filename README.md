@@ -5,47 +5,25 @@
 1. On server:
 
 ```shell
-git clone git@github.com:unnawut/elixir-demo.git
-cd elixir-demo/
-chmod u+x installer.sh server.sh
-./installer.sh
-./server.sh
+MIX_ENV=prod mix phx.server
 ```
 
 2. On test runner (master):
 
 ```shell
-git clone git@github.com:unnawut/elixir-demo.git
-cd elixir-demo/
-chmod u+x installer.sh runner-master.sh
-./runner-master.sh
-```
-
-Then once inside `iex`, execute:
-
-```elixir
-Chaperon.Master.start()
+iex --sname "runner" --cookie "elixir-casually" -S mix run -e 'Chaperon.Master.start()'
 ```
 
 3. On test runners (slave):
 
 ```shell
-git clone git@github.com:unnawut/elixir-demo.git
-cd elixir-demo/
-chmod u+x installer.sh runner-slave.sh
-./runner-slave.sh
+elixir --sname "runner" --cookie "elixir-casually" -S mix run --no-halt
 ```
 
-4. Configure the number of clients:
+4. Run the test from the master runner:
 
 ```elixir
-Application.put_env(:load_tester, :num_clients, 500)
-```
-
-5. Run the test from the master:
-
-```elixir
-LoadTester.run("http://server-1:5000")
+LoadTester.run("http://localhost:5000", num_clients: 50, requests_per_sec: 1, duration: 10)
 ```
 
 ## Test results
