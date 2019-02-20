@@ -23,6 +23,8 @@ mix deps.get
 
 chown -R tuwannu_gmail_com .
 
+ulimit -n 64000
+
 #
 # Specific provisioning
 #
