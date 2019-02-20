@@ -5,18 +5,21 @@
 1. On server:
 
 ```shell
+ulimit -n 64000
 MIX_ENV=prod mix phx.server
 ```
 
 2. On test runner (master):
 
 ```shell
+ulimit -n 64000
 iex --sname "runner" --cookie "elixir-casually" -S mix run -e 'Chaperon.Master.start()'
 ```
 
 3. On test runners (slave):
 
 ```shell
+ulimit -n 64000
 elixir --sname "runner" --cookie "elixir-casually" -S mix run --no-halt
 ```
 
