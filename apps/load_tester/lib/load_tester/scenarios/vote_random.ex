@@ -24,6 +24,6 @@ defmodule LoadTester.Scenarios.VoteRandom do
   end
 
   def do_run(session) do
-    get(session, "/vote_random")
+    get(session, "/vote/genserver")
   end
 end
