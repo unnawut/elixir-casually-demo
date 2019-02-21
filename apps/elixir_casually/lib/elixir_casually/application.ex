@@ -10,9 +10,8 @@ defmodule ElixirCasually.Application do
     _ = :ets.new(:counter, [:set, :public, :named_table])
 
     children = [
-      {ElixirCasually.VoterRegistry, name: ElixirCasually.VoterRegistry},
-      {ElixirCasually.Counter, name: ElixirCasually.Counter},
-      {ElixirCasually.PeriodicInspector, name: ElixirCasually.PeriodicInspector},
+      ElixirCasually.RegistrySupervisor,
+      ElixirCasually.PeriodicInspector
     ]
 
     Supervisor.start_link(children, strategy: :one_for_one, name: ElixirCasually.Supervisor)

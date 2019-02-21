@@ -1,49 +1,292 @@
 <!doctype html>
 <html>
-	<head>
-		<meta charset="utf-8">
-		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+    <title>Concurrency in Elixir, ElixirCausually, 21 Feb 2019.</title>
 
-		<link rel="stylesheet" href="css/reveal.css">
-		<link rel="stylesheet" href="css/theme/black.css">
+    <link rel="stylesheet" href="css/reveal.css">
+    <link rel="stylesheet" href="css/theme/black.css">
+    <link rel="stylesheet" href="css/overrides.css">
 
-		<!-- Theme used for syntax highlighting of code -->
-		<link rel="stylesheet" href="lib/css/zenburn.css">
+    <!-- Theme used for syntax highlighting of code -->
+    <link rel="stylesheet" href="lib/css/monokai-sublime.css">
 
-		<!-- Printing and PDF exports -->
-		<script>
-			var link = document.createElement( 'link' );
-			link.rel = 'stylesheet';
-			link.type = 'text/css';
-			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
-			document.getElementsByTagName( 'head' )[0].appendChild( link );
-		</script>
-	</head>
-	<body>
-		<div class="reveal">
-			<div class="slides">
-				<section>Slide 1</section>
-				<section>Slide 2</section>
-			</div>
-		</div>
+    <!-- Printing and PDF exports -->
+    <script>
+      var link = document.createElement( 'link' );
+      link.rel = 'stylesheet';
+      link.type = 'text/css';
+      link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+      document.getElementsByTagName( 'head' )[0].appendChild( link );
+    </script>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h2>Concurrency in Elixir</h2>
+          <p>Let it crash with GenServer, Supervisor, et al.</p>
+          <p style="margin-top: 3rem;">
+            <small>ElixirCasually. February 21<sup>st</sup>, 2019.</small><br />
+            <small style="font-size: medium;"><a href="https://www.unnawut.com">@unnawut</a>, <a href="https://github.com/omisego/">OmiseGO</a></small>
+          </p>
+        </section>
+        <section>
+          <h2>What you'll see today?</h2>
+          <ol>
+            <li>Umbrella and subapps</li>
+            <li>GenServer</li>
+            <li>Supervisor</li>
+            <li>Crash me if you can! 😱</li>
+          <ol>
+        </section>
+        <section>
+          <pre><code class="lang-elixir" data-trim>
+def start(_type, _args) do
+  _ = :ets.new(:voters, [:set, :public, :named_table])
+  _ = :ets.new(:counter, [:set, :public, :named_table])
 
-		<script src="lib/js/head.min.js"></script>
-		<script src="js/reveal.js"></script>
+  children = [
+    ElixirCasually.RegistrySupervisor,
+    ElixirCasually.PeriodicInspector
+  ]
 
-		<script>
-			// More info about config & dependencies:
-			// - https://github.com/hakimel/reveal.js#configuration
-			// - https://github.com/hakimel/reveal.js#dependencies
-			Reveal.initialize({
-				dependencies: [
-					{ src: 'plugin/markdown/marked.js' },
-					{ src: 'plugin/markdown/markdown.js' },
-					{ src: 'plugin/notes/notes.js', async: true },
-					{ src: 'plugin/highlight/highlight.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
-				]
-			});
-		</script>
-	</body>
+  Supervisor.start_link(children,
+    strategy: :one_for_one,
+    name: ElixirCasually.Supervisor)
+end
+          </code></pre>
+        </section>
+
+        <section>
+          <h2>Umbrella & sub apps</h2>
+          <pre><code class="lang-bash">
+  📂 elixir_casually_umbrella/ # Umbrella
+    📂 apps/
+      📁 elixir_casually/ # Sub-App 1
+      📁 elixir_casually_web/ # Sub-App 2
+      📁 load_tester/ # Sub-App 3
+    📄 mix.exs
+    📄 mix.lock
+
+
+
+          </code></pre>
+          <div>
+            <p>&nbsp;</p>
+            <ol style="visibility: hidden">
+              <li>&nbsp;</li>
+              <li>&nbsp;</li>
+            </ol>
+          </div>
+        </section>
+        <section>
+          <h2>Umbrella & sub apps</h2>
+          <pre><code class="lang-bash">
+  📂 elixir_casually_umbrella/ # Umbrella
+    📂 apps/
+      📁 elixir_casually/ # Sub-App 1
+      📁 elixir_casually_web/ # Sub-App 2
+      📂 load_tester/ # Sub-App 3
+        📂 lib/
+          📄 load_tester.exs
+        📄 mix.exs
+    📄 mix.exs
+    📄 mix.lock
+          </code></pre>
+          <div>
+            <p class="fragment">Umbrella & sub apps allow us to either...</p>
+            <ol style="margin-left: 2rem;">
+              <li class="fragment">Start EACH app separately</li>
+              <li class="fragment">Start ALL apps as a whole</li>
+            </ol>
+          </div>
+        </section>
+        <section>
+          <h2>What you'll see today?</h2>
+          <ol>
+            <li>👌 Umbrella and subapps</li>
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; GenServer</li>
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Supervisor</li>
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Crash me if you can!</li>
+          <ol>
+        </section>
+        <section>
+          <h2>Task.async()</h2>
+          <pre><code class="lang-elixir">
+Task.async(fn ->
+  {:ok, _} = VoterRegistry.register(citizen_id)
+  {:ok, _} = Counter.increment(party_id)
+
+  IO.puts("Voted with async: #{inspect(self())}")
+  json(conn, %{success: true})
+end)
+          </code></pre>
+          <p><a href="http://12.12.12.19:5000/vote/async">http://12.12.12.19:5000/vote/async</a></p>
+        </section>
+        <section>
+          <h2>GenServer</h2>
+          <p>
+            "A GenServer is a process that can be used to <b>keep state</b>,
+            execute code <b>asynchronously</b> and so on."
+          </p>
+          <p><small><a href="https://hexdocs.pm/elixir/GenServer.html">https://hexdocs.pm/elixir/GenServer.html</a></small></p>
+        </section>
+        <section>
+          <h2>Voter & Counter</h2>
+          <pre><code class="lang-elixir">
+defmodule ElixirCasually.Voter do
+  use GenServer
+
+  def start_link(_opts), do: #...
+  def register(citizen_id), do: #...
+end
+
+defmodule ElixirCasually.Counter do
+  use GenServer
+
+  def start_link(_opts), do: #...
+  def increment(party_id), do: #...
+end
+          </code></pre>
+        </section>
+        <section>
+          <h2>VoteController</h2>
+          <pre><code class="lang-elixir">
+defmodule ElixirCasuallyWeb.VoteController do
+  use Phoenix.Controller
+
+  def create(conn, ...) do
+    {:ok, _} = VoterRegistry.register(citizen_id)
+    {:ok, _} = Counter.increment(party_id)
+
+    json(conn, %{success: true})
+  end
+end
+          </code></pre>
+          <p><a href="http://12.12.12.19:5000/vote/genserver">http://12.12.12.19:5000/vote/genserver</a></p>
+        </section>
+        <section>
+          <h2>GenServer</h2>
+          <ul>
+            <li>Handles independent workloads</li>
+            <li>Avoids managing sync locks</li>
+            <li>Avoids spawning new processes</li>
+            <li>Isolates failures</li>
+            <li>Paves the way for automatic recovery 🤔</li>
+          </ul>
+        </section>
+        <section>
+          <h2>What you'll see today?</h2>
+          <ol>
+            <li>👌 Umbrella and subapps</li>
+            <li>👌 GenServer</li>
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Supervisor</li>
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Crash me if you can!</li>
+          <ol>
+        </section>
+        <section>
+          <h2>Supervisor</h2>
+          <p>
+            "... provides  fault-tolerance and encapsulate how our applications start and shutdown."
+          </p>
+          <p><small><a href="https://hexdocs.pm/elixir/Supervisor.html">https://hexdocs.pm/elixir/Supervisor.html</a></small></p>
+        </section>
+        <section>
+          <h2>RegistrySupervisor</h2>
+          <pre><code class="lang-elixir">
+defmodule ElixirCasually.RegistrySupervisor do
+  use Supervisor
+
+  def start_link(opts), do: #...
+
+  def init(_opts) do
+    child_specs = [
+      ElixirCasually.VoterRegistry, # GenServer
+      ElixirCasually.Counter # GenServer
+    ]
+
+    Supervisor.init(child_specs, strategy: :one_for_one)
+  end
+end
+          </code></pre>
+        </section>
+        <section>
+          <h2>RegistrySupervisor</h2>
+          <p>Demo!</p>
+        </section>
+        <section>
+          <h2>What you'll see today?</h2>
+          <ol>
+            <li>👌 Umbrella and subapps</li>
+            <li>👌 GenServer</li>
+            <li>👌 Supervisor</li>
+            <li>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  Crash me if you can!</li>
+          <ol>
+        </section>
+        <section>
+          <h2>Crash me if you can!</h2>
+          <p><a href="http://12.12.12.19:5000">http://12.12.12.19:5000</a></p>
+        </section>
+        <section>
+          <h2>What you've seen today</h2>
+          <ol>
+            <li>👌 Umbrella and subapps</li>
+            <li>👌 GenServer</li>
+            <li>👌 Supervisor</li>
+            <li>👌 Crash me if you can!</li>
+          <ol>
+        </section>
+        <section>
+          <h2>Pick Elixir for</h2>
+          <ol>
+            <li>Fault tolerance</li>
+            <li>Concurrency & distributed architecture</li>
+            <li>Microservices without headache</li>
+          <ol>
+        </section>
+        <section class="credits">
+          <h2>Many thanks to</h2>
+          <img src="./images/adhapol.png"/>
+          <img src="./images/pallop.png"/>
+          <img src="./images/panumarch.png"/>
+          <img src="./images/pii.png"/><br />
+          <img src="./images/pongsatorn.png"/>
+          <img src="./images/ranatchai.png"/>
+          <img src="./images/supanat.png"/>
+          <img src="./images/wasawat.png"/>
+        </section>
+        <section>
+          <h2>References</h2>
+          <ul>
+            <li><a href="https://github.com/unnawut">https://github.com/unnawut</a></li>
+            <li><a href="https://github.com/unnawut/elixir-casually-demo">https://github.com/unnawut/elixir-casually-demo</a></li>
+            <li><a href="https://github.com/omisego/ewallet">https://github.com/omisego/ewallet</a></li>
+            <li><a href="https://github.com/omisego/elixir-omg">https://github.com/omisego/elixir-omg</a></li>
+          </ul>
+        </section>
+      </div>
+    </div>
+
+    <script src="lib/js/head.min.js"></script>
+    <script src="js/reveal.js"></script>
+
+    <script>
+      // More info about config & dependencies:
+      // - https://github.com/hakimel/reveal.js#configuration
+      // - https://github.com/hakimel/reveal.js#dependencies
+      Reveal.initialize({
+        dependencies: [
+          { src: 'plugin/markdown/marked.js' },
+          { src: 'plugin/markdown/markdown.js' },
+          { src: 'plugin/notes/notes.js', async: true },
+          { src: 'plugin/highlight/highlight.pack.js', async: true, callback: function() { hljs.initHighlightingOnLoad(); } }
+        ],
+        history: true,
+        transition: 'fade'
+      });
+    </script>
+  </body>
 </html>

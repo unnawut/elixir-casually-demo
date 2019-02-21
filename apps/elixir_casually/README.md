@@ -1,3 +1,0 @@
-# ElixirCasually
-
-**TODO: Add description**

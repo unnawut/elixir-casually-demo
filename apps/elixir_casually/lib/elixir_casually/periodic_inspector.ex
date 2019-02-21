@@ -1,6 +1,6 @@
 defmodule ElixirCasually.PeriodicInspector do
   use GenServer
-  alias ElixirCasually.{Counter, VoterRegistry}
+  alias ElixirCasually.{Counter, CLI, VoterRegistry}
 
   #
   # Client API
@@ -15,6 +15,9 @@ defmodule ElixirCasually.PeriodicInspector do
   #
 
   def init(_opts) do
+    Process.flag(:trap_exit, true)
+    CLI.info("#{__MODULE__} starting...")
+
     schedule_inspect_self()
 
     {:ok, nil}
@@ -41,6 +44,7 @@ defmodule ElixirCasually.PeriodicInspector do
     ""
     |> Kernel.<>("Voters: #{length(VoterRegistry.all())}, ")
     |> Kernel.<>("Counts: #{Counter.all() |> Map.values() |> Enum.sum()}, ")
+    |> Kernel.<>("Main: #{inspect(self())}, ")
     |> Kernel.<>("VoterRegistry #{inspect(Process.whereis(VoterRegistry))}, ")
     |> Kernel.<>("Counter #{inspect(Process.whereis(Counter))}")
     |> IO.puts()
@@ -49,5 +53,9 @@ defmodule ElixirCasually.PeriodicInspector do
     |> Enum.each(fn {vote_number, count} ->
       IO.puts("  #{vote_number}: #{count}")
     end)
+  end
+
+  def terminate(_reason, _state) do
+    CLI.error("#{__MODULE__} terminating. Persisting the Data... Done.")
   end
 end

@@ -1,8 +1,43 @@
 @font-face {
     font-family: 'Source Sans Pro';
+    src: url('source-sans-pro-extralight.eot');
+    src: url('source-sans-pro-extralight.eot?#iefix') format('embedded-opentype'),
+         url('source-sans-pro-extralight.ttf') format('truetype');
+    font-weight: 200;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Source Sans Pro';
+    src: url('source-sans-pro-extralightitalic.eot');
+    src: url('source-sans-pro-extralightitalic.eot?#iefix') format('embedded-opentype'),
+         url('source-sans-pro-extralightitalic.ttf') format('truetype');
+    font-weight: 200;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Source Sans Pro';
+    src: url('source-sans-pro-light.eot');
+    src: url('source-sans-pro-light.eot?#iefix') format('embedded-opentype'),
+         url('source-sans-pro-light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Source Sans Pro';
+    src: url('source-sans-pro-lightitalic.eot');
+    src: url('source-sans-pro-lightitalic.eot?#iefix') format('embedded-opentype'),
+         url('source-sans-pro-lightitalic.ttf') format('truetype');
+    font-weight: 300;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Source Sans Pro';
     src: url('source-sans-pro-regular.eot');
     src: url('source-sans-pro-regular.eot?#iefix') format('embedded-opentype'),
-         url('source-sans-pro-regular.woff') format('woff'),
          url('source-sans-pro-regular.ttf') format('truetype');
     font-weight: normal;
     font-style: normal;

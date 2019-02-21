@@ -17,7 +17,7 @@ body {
 .reveal {
   font-family: "Source Sans Pro", Helvetica, sans-serif;
   font-size: 42px;
-  font-weight: normal;
+  font-weight: 300;
   color: #fff; }
 
 ::selection {
@@ -47,10 +47,10 @@ body {
   margin: 0 0 20px 0;
   color: #fff;
   font-family: "Source Sans Pro", Helvetica, sans-serif;
-  font-weight: 600;
+  font-weight: normal;
   line-height: 1.2;
   letter-spacing: normal;
-  text-transform: uppercase;
+  /*text-transform: uppercase;*/
   text-shadow: none;
   word-wrap: break-word; }
 
@@ -152,13 +152,16 @@ body {
   box-shadow: 0px 0px 6px rgba(0, 0, 0, 0.3); }
 
 .reveal code {
-  font-family: monospace;
+  font-family: "Monaco", monospace;
+  font-size: 70%;
+  line-height: 1.5em;
   text-transform: none; }
 
 .reveal pre code {
   display: block;
   padding: 5px;
-  overflow: auto;
+  font-weight: 100;
+  overflow: hidden;
   max-height: 400px;
   word-wrap: normal; }
 

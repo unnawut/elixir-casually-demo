@@ -1,5 +1,6 @@
 defmodule ElixirCasually.VoterRegistry do
   use GenServer
+  alias ElixirCasually.CLI
 
   #
   # Client API
@@ -45,6 +46,8 @@ defmodule ElixirCasually.VoterRegistry do
   #
 
   def init(_opts) do
+    Process.flag(:trap_exit, true)
+    CLI.info("#{__MODULE__} starting...")
     {:ok, nil}
   end
 
@@ -56,5 +59,9 @@ defmodule ElixirCasually.VoterRegistry do
       false ->
         {:reply, {:error, :already_registered}, state}
     end
+  end
+
+  def terminate(_reason, _state) do
+    CLI.error("#{__MODULE__} terminating... Persisting the Data... Done.")
   end
 end
