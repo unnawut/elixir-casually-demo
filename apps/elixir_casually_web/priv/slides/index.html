@@ -43,24 +43,6 @@
           <ol>
         </section>
         <section>
-          <pre><code class="lang-elixir" data-trim>
-def start(_type, _args) do
-  _ = :ets.new(:voters, [:set, :public, :named_table])
-  _ = :ets.new(:counter, [:set, :public, :named_table])
-
-  children = [
-    ElixirCasually.RegistrySupervisor,
-    ElixirCasually.PeriodicInspector
-  ]
-
-  Supervisor.start_link(children,
-    strategy: :one_for_one,
-    name: ElixirCasually.Supervisor)
-end
-          </code></pre>
-        </section>
-
-        <section>
           <h2>Umbrella & sub apps</h2>
           <pre><code class="lang-bash">
   📂 elixir_casually_umbrella/ # Umbrella
