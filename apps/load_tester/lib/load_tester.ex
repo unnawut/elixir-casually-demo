@@ -49,7 +49,7 @@ defmodule LoadTester do
 
   defp report(session) do
     target_base_url = Application.get_env(:load_tester, :target_base_url)
-    metrics = Map.get(session.metrics, {:get, "#{target_base_url}/vote_random"})
+    metrics = Map.get(session.metrics, {:get, "#{target_base_url}/vote/genserver"})
 
     IO.puts("""
       Load test finished.
